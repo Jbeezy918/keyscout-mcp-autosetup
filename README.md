@@ -32,7 +32,7 @@ Hand-editing `mcp.json` usually means pasting a raw token into a file that gets 
 - **AgentKey handoff**: inject into a child env only, or a local inject proxy so Agent B never holds the key.
 - Dry-run setup for Claude, Cursor, VS Code, Windsurf.
 
-**Want the full key manager?** [KeyScout](https://getkeyscout.com) finds every key on your machine, tracks where each one lives, and keeps them in one vault. This free tool is the open-source piece of it.
+**Want the full key manager?** [KeyScout](https://getkeyscout.com) (Mac & Windows, free to start) searches nearly 5,000 APIs, links to each key page, keeps your keys in an encrypted vault on your own computer, and scans projects for keys you already leaked. This free tool is the open-source piece of it.
 
 ## Security
 See [SECURITY.md](SECURITY.md). Never commit real keys; tests use `ghp_FAKE…` only.
