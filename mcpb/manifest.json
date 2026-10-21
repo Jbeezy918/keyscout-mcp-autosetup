@@ -1,0 +1,26 @@
+{
+  "manifest_version": "0.3",
+  "name": "keyscout-mcp-autosetup",
+  "display_name": "KeyScout MCP Auto-Setup",
+  "version": "0.1.0",
+  "description": "Match an API key to MCP servers and write client configs with no plaintext secrets.",
+  "long_description": "Finds MCP servers in the Official MCP Registry that accept your key type, scores them A-F (automated heuristics, not an audit), previews client configs, and writes them into a sandbox folder (dry-run by default) so servers launch via an encrypted local vault instead of a plaintext key. No tool ever takes or returns a raw key.",
+  "author": { "name": "SavvyTech Consulting LLC", "url": "https://getkeyscout.com" },
+  "homepage": "https://getkeyscout.com",
+  "repository": { "type": "git", "url": "https://github.com/Jbeezy918/keyscout-mcp-autosetup" },
+  "license": "Apache-2.0",
+  "keywords": ["mcp", "api-keys", "secrets", "configuration", "security"],
+  "server": {
+    "type": "python",
+    "entry_point": "ksmcp/server.py",
+    "mcp_config": { "command": "uvx", "args": ["keyscout-mcp-autosetup"] }
+  },
+  "tools": [
+    { "name": "list_apis", "description": "APIs it can match, with where to get each key" },
+    { "name": "detect_clients", "description": "Which MCP clients have a config file (read-only)" },
+    { "name": "find_servers", "description": "Registry servers that accept a key type, A-F scored" },
+    { "name": "preview_config", "description": "Config each client would get; writes nothing" },
+    { "name": "apply_setup", "description": "Write configs into a sandbox folder; dry-run by default" }
+  ],
+  "compatibility": { "platforms": ["darwin", "win32", "linux"], "runtimes": { "python": ">=3.10" } }
+}
