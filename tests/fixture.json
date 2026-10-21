@@ -1,0 +1,160 @@
+[
+ {
+  "server": {
+   "name": "io.github.github/github-mcp-server",
+   "repository": {
+    "url": "https://github.com/github/github-mcp-server"
+   },
+   "packages": [
+    {
+     "registryType": "oci",
+     "identifier": "ghcr.io/github/github-mcp-server",
+     "environmentVariables": [
+      {
+       "name": "GITHUB_PERSONAL_ACCESS_TOKEN",
+       "isSecret": true
+      }
+     ]
+    }
+   ],
+   "remotes": [
+    {
+     "type": "streamable-http",
+     "url": "https://api.githubcopilot.com/mcp/",
+     "headers": [
+      {
+       "name": "Authorization",
+       "value": "Bearer {GITHUB_TOKEN}",
+       "isSecret": true
+      }
+     ]
+    }
+   ]
+  },
+  "_meta": {
+   "io.modelcontextprotocol.registry/official": {
+    "status": "active",
+    "isLatest": true
+   }
+  }
+ },
+ {
+  "server": {
+   "name": "io.github.someone/gh-tool",
+   "repository": {
+    "url": "https://github.com/someone/gh-tool"
+   },
+   "packages": [
+    {
+     "registryType": "npm",
+     "identifier": "gh-tool",
+     "version": "1.0.0",
+     "environmentVariables": [
+      {
+       "name": "GITHUB_TOKEN"
+      }
+     ]
+    }
+   ]
+  },
+  "_meta": {
+   "io.modelcontextprotocol.registry/official": {
+    "status": "active",
+    "isLatest": true
+   }
+  }
+ },
+ {
+  "server": {
+   "name": "io.github.x/remote-gh",
+   "remotes": [
+    {
+     "type": "streamable-http",
+     "url": "https://gh.example/mcp",
+     "headers": [
+      {
+       "name": "GITHUB_TOKEN",
+       "value": "{token}"
+      }
+     ]
+    }
+   ]
+  },
+  "_meta": {
+   "io.modelcontextprotocol.registry/official": {
+    "status": "active",
+    "isLatest": true
+   }
+  }
+ },
+ {
+  "server": {
+   "name": "io.github.old/deprecated-gh",
+   "packages": [
+    {
+     "registryType": "npm",
+     "identifier": "d",
+     "environmentVariables": [
+      {
+       "name": "GITHUB_TOKEN"
+      }
+     ]
+    }
+   ]
+  },
+  "_meta": {
+   "io.modelcontextprotocol.registry/official": {
+    "status": "deprecated",
+    "isLatest": true
+   }
+  }
+ },
+ {
+  "server": {
+   "name": "ai.smithery/proxy",
+   "remotes": [
+    {
+     "type": "streamable-http",
+     "url": "https://s/mcp",
+     "headers": [
+      {
+       "name": "Authorization",
+       "value": "Bearer {smithery_api_key}"
+      }
+     ]
+    }
+   ]
+  },
+  "_meta": {}
+ },
+ {
+  "server": {
+   "name": "io.github.community/generic-gh",
+   "repository": {
+    "url": "https://github.com/community/generic-gh",
+    "license": "MIT"
+   },
+   "packages": [
+    {
+     "registryType": "npm",
+     "identifier": "generic-gh",
+     "version": "0.1.0",
+     "environmentVariables": [
+      {
+       "name": "API_KEY",
+       "description": "GitHub personal access token (PAT)",
+       "isSecret": true
+      }
+     ]
+    }
+   ]
+  },
+  "_meta": {
+   "io.modelcontextprotocol.registry/official": {
+    "status": "active",
+    "isLatest": true,
+    "updatedAt": "2026-10-01T00:00:00Z"
+   }
+  }
+ }
+]

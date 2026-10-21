@@ -1,0 +1,10 @@
+#!/usr/bin/env python3
+"""Launcher: keyscout-run <vault-ref> --env VAR -- cmd args...  Injects the key into the child env only."""
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+from ksmcp.vault import Vault
+ref = sys.argv[1]; var = sys.argv[sys.argv.index("--env") + 1]; cmd = sys.argv[sys.argv.index("--") + 1:]
+vault = os.environ.get("KEYSCOUT_VAULT", os.path.expanduser("~/.keyscout/vault.json"))
+env = dict(os.environ, **{var: Vault(vault).get(ref)})
+cmd = [a.replace("${%s}" % var, env[var]) for a in cmd]
+os.execvpe(cmd[0], cmd, env)

@@ -1,0 +1,57 @@
+$ ksmcp --sandbox /tmp/demo find github   (LIVE official registry)
+  15  io.github.AbdulMuhaiminKhan/github-mcp  [has-repo, local-package]  key via env:GITHUB_TOKEN
+  15  io.github.Abhishekkumar2021/github  [has-repo, local-package]  key via env:GITHUB_TOKEN
+
+$ ksmcp --sandbox /tmp/demo --fixture tests/fixture.json setup --key ghp_FAKE... --top 2
+stored key in sandbox vault as keyscout-github (not written to any config)
+API: GitHub  get key: https://github.com/settings/tokens  free tier: Free
+  + io.github.github/github-mcp-server [official, has-repo, local-package, remote]
+  + io.github.someone/gh-tool [has-repo, local-package]
+claude: written /tmp/demo/Library/Application Support/Claude/claude_desktop_config.json
+cursor: written /tmp/demo/.cursor/mcp.json
+vscode: written /tmp/demo/.vscode/mcp.json
+
+--- /tmp/demo/.cursor/mcp.json
+{
+  "mcpServers": {
+    "github-mcp-server": {
+      "command": "keyscout-run",
+      "args": [
+        "keyscout-github",
+        "--env",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "--",
+        "docker",
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server"
+      ]
+    },
+    "gh-tool": {
+      "command": "keyscout-run",
+      "args": [
+        "keyscout-github",
+        "--env",
+        "GITHUB_TOKEN",
+        "--",
+        "npx",
+        "-y",
+        "gh-tool@1.0.0"
+      ]
+    }
+  }
+}
+$ handoff issue / redeem / reuse
+stand-in token for agentB: ksh_t0OrmaMcmvhaKF_K_VnT0p3w1930eM01  (id 2607ec5bfefe, ttl 120s, uses 1)
+agentB got key of length 39
+[REDACTED]
+DENIED: already used
+--- audit.log
+{"ts": 1792562050.526, "event": "issue", "token_id": "2607ec5bfefe", "ref": "keyscout-github", "frm": "agentA", "to": "agentB", "ttl": 120, "uses": 1, "scope": ["read-repo"], "spend_cap": null}
+{"ts": 1792562050.572, "event": "redeem", "token_id": "2607ec5bfefe", "agent": "agentB", "purpose": "read-repo", "cost": 0}
+{"ts": 1792562050.616, "event": "deny", "token_id": "2607ec5bfefe", "agent": "agentB", "reason": "already used"}
+
+raw key found in no file except vault.json
