@@ -8,6 +8,7 @@ All notable changes to this project are documented here. Format: [Keep a Changel
 - **MCP server (stdio)** `keyscout-mcp-autosetup` with tools `list_apis`, `detect_clients`, `find_servers`, `preview_config`, `apply_setup` (dry-run by default; writes only inside a sandbox folder, never the real home dir; backs up existing files).
 - Works with MCP Python SDK 1.x and 2.x.
 - Packaging (`pyproject.toml`): one-line run with `uvx keyscout-mcp-autosetup`; console scripts `ksmcp`, `keyscout-run`.
+- MCPB bundle manifest + `scripts/build_mcpb.sh` (Smithery / Claude Desktop).
 - `server.json` for the Official MCP Registry (validated against the 2025-12-11 schema).
 - Platform-aware Claude Desktop config path (macOS, Windows, Linux).
 - `ksmcp vault-put` prompts for the key when `--key` is omitted, keeping it out of shell history.
