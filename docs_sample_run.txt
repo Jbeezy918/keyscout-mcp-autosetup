@@ -45,7 +45,7 @@ vscode: written /tmp/demo/.vscode/mcp.json
   }
 }
 $ handoff issue / redeem / reuse
-stand-in token for agentB: ksh_t0OrmaMcmvhaKF_K_VnT0p3w1930eM01  (id 2607ec5bfefe, ttl 120s, uses 1)
+stand-in token for agentB: ksh_<redacted>  (id 2607ec5bfefe, ttl 120s, uses 1)
 agentB got key of length 39
 [REDACTED]
 DENIED: already used
