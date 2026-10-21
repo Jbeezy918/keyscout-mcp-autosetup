@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "keyscout-mcp-autosetup"
+version = "0.1.0"
+description = "Match an API key to MCP servers and write client configs with no plaintext secrets."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "SavvyTech Consulting LLC" }]
+keywords = ["mcp", "model-context-protocol", "api-keys", "secrets", "claude", "cursor"]
+dependencies = ["mcp>=1.2", "cryptography>=42.0", "keyring>=25.0"]
+
+[project.urls]
+Homepage = "https://getkeyscout.com"
+Repository = "https://github.com/Jbeezy918/keyscout-mcp-autosetup"
+
+[project.scripts]
+keyscout-mcp-autosetup = "ksmcp.server:main"
+ksmcp = "ksmcp.cli:main"
+keyscout-run = "ksmcp.run:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["ksmcp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -17,3 +17,6 @@ venv/
 node_modules/
 
 .ruff_cache/
+dist/
+build/
+*.egg-info/

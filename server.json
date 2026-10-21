@@ -1,0 +1,24 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.Jbeezy918/keyscout-mcp-autosetup",
+  "title": "KeyScout MCP Auto-Setup",
+  "description": "Match an API key to MCP servers and write client configs with no plaintext secrets.",
+  "websiteUrl": "https://getkeyscout.com",
+  "repository": {
+    "url": "https://github.com/Jbeezy918/keyscout-mcp-autosetup",
+    "source": "github"
+  },
+  "version": "0.1.0",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "registryBaseUrl": "https://pypi.org",
+      "identifier": "keyscout-mcp-autosetup",
+      "version": "0.1.0",
+      "runtimeHint": "uvx",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}

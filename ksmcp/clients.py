@@ -4,10 +4,18 @@
 import json
 import os
 import shutil
+import sys
 import time
 
+if sys.platform == "darwin":
+    _CLAUDE = "Library/Application Support/Claude/claude_desktop_config.json"
+elif sys.platform.startswith("win"):
+    _CLAUDE = "AppData/Roaming/Claude/claude_desktop_config.json"
+else:  # Linux: unofficial Claude Desktop builds use XDG config
+    _CLAUDE = ".config/Claude/claude_desktop_config.json"
+
 CLIENTS = {  # paths relative to sandbox "home"
-    "claude": ("Library/Application Support/Claude/claude_desktop_config.json", "mcpServers"),
+    "claude": (_CLAUDE, "mcpServers"),
     "cursor": (".cursor/mcp.json", "mcpServers"),
     "vscode": (".vscode/mcp.json", "servers"),        # workspace-level VS Code file
     "windsurf": (".codeium/windsurf/mcp_config.json", "mcpServers"),

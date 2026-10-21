@@ -98,7 +98,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     vp = sub.add_parser("vault-put", help="Store a key in the encrypted vault")
     vp.add_argument("ref")
-    vp.add_argument("--key", required=True)
+    vp.add_argument("--key", help="Omit to be prompted (keeps the key out of shell history)")
     vp.add_argument("--save-keyring", action="store_true", help="Remember passphrase in OS keyring")
 
     sub.add_parser("quickstart", help="Print a 60-second getting-started guide")
@@ -151,7 +151,15 @@ def main(argv=None):
         return registry.fetch(api, os.path.join(root, ".ksmcp-cache"))
 
     if o.cmd == "vault-put":
-        _vault(root, getattr(o, "vault_pass", None)).put(o.ref, o.key)
+        key = o.key
+        if not key:
+            import getpass
+
+            key = getpass.getpass(f"Key for {o.ref} (input hidden): ").strip()
+        if not key:
+            print("no key entered; nothing stored", file=sys.stderr)
+            return 2
+        _vault(root, getattr(o, "vault_pass", None)).put(o.ref, key)
         print(f"stored {o.ref} (encrypted at rest)")
         return 0
 
