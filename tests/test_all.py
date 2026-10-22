@@ -126,7 +126,8 @@ def test_handoff_proxy_mode(tmp_path):
     tok, _ = H.issue("gh", "A", "B", uses=2)
     proxy, info = H.redeem_proxy(tok, "B", target)
     import urllib.request
-    with urllib.request.urlopen(info["listen"] + "/hello") as r:
+    req = urllib.request.Request(info["listen"] + "/hello", headers={info["auth_header"]: info["session_token"]})
+    with urllib.request.urlopen(req) as r:
         assert r.read() == b"ok"
     assert seen.get("auth") == f"Bearer {FAKE}"
     # Agent-facing URL must not embed the key
