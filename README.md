@@ -45,6 +45,24 @@ ksmcp --sandbox "$SB" vault-put keyscout-github      # prompts; key stays out of
 
 Configs launch servers through `keyscout-run`, which pulls the key from the encrypted vault into the child process env only (set `KEYSCOUT_VAULT` to the vault path printed by the tool).
 
+## Agent handoff proxy (breaking change in 0.1.0)
+`ksmcp handoff proxy` now prints a `session_token` and requires every request to send it:
+
+```bash
+curl -H "X-KeyScout-Proxy-Token: <session_token>" http://127.0.0.1:<port>/user
+```
+
+Requests without the token get `401`. Paths must be plain paths (`/repos/...`). Full URLs, `//host` forms and anything that would change the destination host get `400`, and the key is never sent. The proxy only binds to localhost. See [SECURITY.md](SECURITY.md).
+
+## Recovery and troubleshooting
+- **Where things live:** the vault is `<sandbox>/.keyscout/vault.json` for the CLI (or `~/.keyscout/vault.json` / `KEYSCOUT_VAULT` for `keyscout-run`). The registry cache is in `~/.keyscout` (override with `KSMCP_CACHE`).
+- **Undo a config write:** `apply_setup` / `ksmcp setup` back up every file before changing it as `<file>.bak-<timestamp>-<n>`. To roll back, copy the newest `.bak-` file over the config and restart your client.
+- **Back up the vault:** copy `vault.json` while nothing is writing to it. It's encrypted, so you'll need the same passphrase to restore it.
+- **Forgot the vault passphrase:** the vault can't be decrypted without it. Move the old `vault.json` aside, run `ksmcp vault-put` again for each key, and rotate any key you can't account for.
+- **`keyscout-run` says the entry is missing:** check that `KEYSCOUT_VAULT` points to the vault the tool printed and that the entry name matches.
+- **Proxy returns 401 or 400:** send the `X-KeyScout-Proxy-Token` header, and use a plain path, not a full URL.
+- **`find_servers` fails offline:** it needs the Official MCP Registry. The cache only helps within 24 hours of the last successful fetch.
+
 ## Platforms
 macOS, Linux, Windows; Python 3.10+. CI runs all three. Claude Desktop config path is chosen per OS.
 
